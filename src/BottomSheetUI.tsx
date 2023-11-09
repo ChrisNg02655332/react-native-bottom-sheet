@@ -8,7 +8,6 @@ import Animated, {
   runOnJS,
   withTiming,
 } from 'react-native-reanimated';
-import type { SpringConfig } from 'react-native-reanimated/lib/typescript/reanimated2/animation/springUtils';
 
 import type {
   BottomSheetConfig,
@@ -39,15 +38,6 @@ type BottomSheetUIProps = {
   hide: (params: BottomSheetHideParams) => void;
 };
 
-const springConfig: SpringConfig = {
-  duration: 1200,
-  dampingRatio: 1,
-  stiffness: 100,
-  overshootClamping: false,
-  restDisplacementThreshold: 0.01,
-  restSpeedThreshold: 2,
-};
-
 const BottomSheetUI = (props: BottomSheetUIProps) => {
   const {
     hide,
@@ -61,7 +51,7 @@ const BottomSheetUI = (props: BottomSheetUIProps) => {
   const scrollTo = React.useCallback(
     (destination: number) => {
       'worklet';
-      translateY.value = withSpring(destination, springConfig, () => {
+      translateY.value = withSpring(destination, { damping: 50 }, () => {
         if (destination === 0) runOnJS(hide)();
       });
     },
