@@ -1,11 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import {
+  GestureDetector,
+  Gesture,
+  ScrollView,
+} from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
   runOnJS,
+  withTiming,
 } from 'react-native-reanimated';
 
 import type {
@@ -19,6 +24,17 @@ import { SCREEN_HEIGHT, MAX_TRANSLATE_Y } from './useBottomSheet';
 
 const MAX_OPACITY = 0.8;
 
+function renderContent({ options, config, show, hide }: BottomSheetUIProps) {
+  const { type, props } = options;
+
+  if (type) {
+    const ModalComponent = config[type]!;
+    return ModalComponent({ hide, props, show, type });
+  }
+
+  return null;
+}
+
 type BottomSheetUIProps = {
   options: BottomSheetOptions;
   config: BottomSheetConfig;
@@ -26,11 +42,15 @@ type BottomSheetUIProps = {
   hide: (params: BottomSheetHideParams) => void;
 };
 
-const BottomSheetUI = ({ hide, options: { height } }: BottomSheetUIProps) => {
+const BottomSheetUI = (props: BottomSheetUIProps) => {
+  const {
+    hide,
+    options: { height, disableClose, scrollEnabled, customBackdrop },
+  } = props;
   const translateY = useSharedValue(0);
   const context = useSharedValue({ y: 0 });
 
-  const backdrop = useSharedValue(MAX_OPACITY);
+  const backdrop = useSharedValue(0);
 
   const scrollTo = React.useCallback(
     (destination: number) => {
@@ -42,6 +62,11 @@ const BottomSheetUI = ({ hide, options: { height } }: BottomSheetUIProps) => {
     [translateY, hide]
   );
 
+  const onHide = () => {
+    backdrop.value = withTiming(0);
+    scrollTo(0);
+  };
+
   const gesture = Gesture.Pan()
     .onStart(() => {
       context.value = { y: translateY.value };
@@ -50,14 +75,18 @@ const BottomSheetUI = ({ hide, options: { height } }: BottomSheetUIProps) => {
     .onUpdate((event) => {
       translateY.value = event.translationY + context.value.y;
       translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y);
-
-      backdrop.value = event.translationY;
     })
     .onEnd(() => {
-      if (translateY.value > -height!) {
-        scrollTo(0);
-      } else if (translateY.value > -SCREEN_HEIGHT / 2) {
+      if (translateY.value < (-4 * height!) / 3) {
         scrollTo(MAX_TRANSLATE_Y);
+      } else if (
+        (translateY.value <= (-2 * height!) / 3 &&
+          translateY.value >= (-4 * height!) / 3) ||
+        disableClose
+      ) {
+        scrollTo(-height!);
+      } else if (translateY.value > (-2 * height!) / 3) {
+        runOnJS(onHide)();
       }
     });
 
@@ -69,24 +98,35 @@ const BottomSheetUI = ({ hide, options: { height } }: BottomSheetUIProps) => {
 
   const backdropStyle = useAnimatedStyle(() => {
     return {
-      opacity: Math.min(1 - backdrop.value / 350, MAX_OPACITY),
+      opacity: Math.min(backdrop.value, MAX_OPACITY),
     };
   });
 
+  const Wrapper = scrollEnabled ? ScrollView : View;
+
   React.useEffect(() => {
     scrollTo(-Math.abs(height!));
-  }, [height, scrollTo]);
+    backdrop.value = withTiming(MAX_OPACITY);
+  }, [height, scrollTo, backdrop]);
 
   return (
     <>
-      <TouchableWithoutFeedback onPress={() => scrollTo(0)}>
-        <Animated.View style={[styles.backdrop, backdropStyle]} />
+      <TouchableWithoutFeedback
+        onPress={() => {
+          disableClose ? null : onHide();
+        }}
+      >
+        {typeof customBackdrop === 'function' ? (
+          customBackdrop()
+        ) : (
+          <Animated.View style={[styles.backdrop, backdropStyle]} />
+        )}
       </TouchableWithoutFeedback>
 
       <GestureDetector gesture={gesture}>
         <Animated.View style={[styles.container, animateStyle]}>
           <View style={styles.line} />
-          <Text>Content</Text>
+          <Wrapper style={styles.content}>{renderContent(props)}</Wrapper>
         </Animated.View>
       </GestureDetector>
     </>
@@ -117,6 +157,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 15,
     borderRadius: 2,
+  },
+  content: {
+    padding: 16,
   },
 });
 

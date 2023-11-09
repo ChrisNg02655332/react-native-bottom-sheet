@@ -2,6 +2,9 @@ export type BottomSheetOptions = {
   type?: string;
   /** @description it should percent of screen */
   height?: number;
+  disableClose?: boolean;
+  scrollEnabled?: boolean;
+  customBackdrop?: () => React.ReactNode;
   onShow?: () => void;
   onHide?: () => void;
   props?: any;
@@ -13,7 +16,6 @@ export type BottomSheetHideParams = void;
 
 export type BottomSheetConfigParams<Props> = {
   type: string;
-  visible: boolean;
   show: (params: BottomSheetShowParams) => void;
   hide: (params: BottomSheetHideParams) => void;
   props: Props;
