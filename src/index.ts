@@ -1,6 +1,4 @@
-export function multiply(a: number, b: number): Promise<number> {
-  return Promise.resolve(a * b);
-}
+export { ScrollView as BottomSheetScrollView } from 'react-native-gesture-handler';
 
 export * from './BottomSheet';
 export * from './BottomSheetUI';
