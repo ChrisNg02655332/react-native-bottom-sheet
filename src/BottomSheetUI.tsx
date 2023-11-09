@@ -61,7 +61,6 @@ const BottomSheetUI = ({
       translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y);
     })
     .onEnd(() => {
-      console.log(disableClose);
       if (translateY.value < (-4 * height!) / 3) {
         scrollTo(MAX_TRANSLATE_Y);
       } else if (
