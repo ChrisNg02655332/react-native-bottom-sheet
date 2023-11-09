@@ -39,7 +39,9 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/ChrisNg02655332/react-native-bottom-sheet",
+  "repository": {
+    "url": "https://github.com/ChrisNg02655332/react-native-bottom-sheet"
+  },
   "author": "Chris Nguyen <chris.dungnguyen@gmail.com> (https://github.com/ChrisNg02655332)",
   "license": "MIT",
   "bugs": {
