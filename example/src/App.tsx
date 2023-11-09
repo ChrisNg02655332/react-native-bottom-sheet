@@ -9,8 +9,6 @@ const { height } = Dimensions.get('window');
 const Content1 = (props: any) => {
   console.log(props);
 
-  console.log('aaaaaaaa');
-
   return (
     <View>
       <Text>Content 1</Text>
