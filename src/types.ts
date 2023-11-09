@@ -2,6 +2,7 @@ export type BottomSheetOptions = {
   type?: string;
   /** @description it should percent of screen */
   height?: number;
+  disableClose?: boolean;
   onShow?: () => void;
   onHide?: () => void;
   props?: any;

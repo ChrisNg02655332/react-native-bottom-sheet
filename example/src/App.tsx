@@ -31,6 +31,7 @@ export default function App() {
               BottomSheet.show({
                 type: 'content_1',
                 height: height * 0.5,
+                disableClose: true,
               });
             }}
           />

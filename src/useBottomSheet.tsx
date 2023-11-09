@@ -41,18 +41,18 @@ export function useBottomSheet({
       const {
         type,
         height = initialOptions.height,
+        disableClose = initialOptions.disableClose,
         onShow = initialOptions.onShow,
         onHide = initialOptions.onHide,
         props = initialOptions.props,
       } = params;
-
-      console.log(params);
 
       setOptions(
         mergeIfDefined(initialOptions, {
           type,
           dismiss: hide,
           height,
+          disableClose,
           onShow,
           onHide,
           props,
