@@ -1,6 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import {
+  GestureDetector,
+  Gesture,
+  ScrollView,
+} from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -20,6 +24,17 @@ import { SCREEN_HEIGHT, MAX_TRANSLATE_Y } from './useBottomSheet';
 
 const MAX_OPACITY = 0.8;
 
+function renderContent({ options, config, show, hide }: BottomSheetUIProps) {
+  const { type, props } = options;
+
+  if (type) {
+    const ModalComponent = config[type]!;
+    return ModalComponent({ hide, props, show, type });
+  }
+
+  return null;
+}
+
 type BottomSheetUIProps = {
   options: BottomSheetOptions;
   config: BottomSheetConfig;
@@ -27,10 +42,11 @@ type BottomSheetUIProps = {
   hide: (params: BottomSheetHideParams) => void;
 };
 
-const BottomSheetUI = ({
-  hide,
-  options: { height, disableClose },
-}: BottomSheetUIProps) => {
+const BottomSheetUI = (props: BottomSheetUIProps) => {
+  const {
+    hide,
+    options: { height, disableClose, scrollEnabled, customBackdrop },
+  } = props;
   const translateY = useSharedValue(0);
   const context = useSharedValue({ y: 0 });
 
@@ -86,6 +102,8 @@ const BottomSheetUI = ({
     };
   });
 
+  const Wrapper = scrollEnabled ? ScrollView : View;
+
   React.useEffect(() => {
     scrollTo(-Math.abs(height!));
     backdrop.value = withTiming(MAX_OPACITY);
@@ -93,14 +111,22 @@ const BottomSheetUI = ({
 
   return (
     <>
-      <TouchableWithoutFeedback onPress={onHide}>
-        <Animated.View style={[styles.backdrop, backdropStyle]} />
+      <TouchableWithoutFeedback
+        onPress={() => {
+          disableClose ? null : onHide();
+        }}
+      >
+        {typeof customBackdrop === 'function' ? (
+          customBackdrop()
+        ) : (
+          <Animated.View style={[styles.backdrop, backdropStyle]} />
+        )}
       </TouchableWithoutFeedback>
 
       <GestureDetector gesture={gesture}>
         <Animated.View style={[styles.container, animateStyle]}>
           <View style={styles.line} />
-          <Text>Content</Text>
+          <Wrapper style={styles.content}>{renderContent(props)}</Wrapper>
         </Animated.View>
       </GestureDetector>
     </>
@@ -131,6 +157,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 15,
     borderRadius: 2,
+  },
+  content: {
+    padding: 16,
   },
 });
 

@@ -9,18 +9,38 @@ const { height } = Dimensions.get('window');
 const Content1 = (props: any) => {
   console.log(props);
 
+  console.log('aaaaaaaa');
+
   return (
     <View>
       <Text>Content 1</Text>
+      <Button
+        title="Hide"
+        onPress={() => {
+          BottomSheet.hide();
+        }}
+      />
     </View>
   );
 };
 
 const config = {
-  content_1: Content1,
+  content_1: (props: any) => <Content1 {...props} />,
 };
 
 export default function App() {
+  const backdrop = () => (
+    <View
+      style={{
+        position: 'absolute',
+        zIndex: 1,
+        height: height,
+        width: '100%',
+        backgroundColor: 'red',
+      }}
+    />
+  );
+
   return (
     <>
       <GestureHandlerRootView style={{ flex: 1 }}>
@@ -31,7 +51,12 @@ export default function App() {
               BottomSheet.show({
                 type: 'content_1',
                 height: height * 0.5,
-                disableClose: true,
+                disableClose: false,
+                scrollEnabled: true,
+                customBackdrop: backdrop,
+                props: {
+                  hehe: 'aaa',
+                },
               });
             }}
           />
