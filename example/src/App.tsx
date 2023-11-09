@@ -1,31 +1,50 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-bottom-sheet';
+import { Button, Dimensions, StyleSheet, Text, View } from 'react-native';
+import { BottomSheet } from 'react-native-bottom-sheet';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+const { height } = Dimensions.get('window');
 
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+const Content1 = (props: any) => {
+  console.log(props);
 
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
+    <View>
+      <Text>Content 1</Text>
     </View>
+  );
+};
+
+const config = {
+  content_1: Content1,
+};
+
+export default function App() {
+  return (
+    <>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <Button
+            title="Content 1"
+            onPress={() => {
+              BottomSheet.show({
+                type: 'content_1',
+                height: height * 0.5,
+              });
+            }}
+          />
+        </View>
+        <BottomSheet config={config} />
+      </GestureHandlerRootView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+    alignItems: 'center',
   },
 });
