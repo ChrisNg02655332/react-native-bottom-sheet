@@ -1675,9 +1675,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chrisnguyen/react-native-bottom-sheet@workspace:.":
+"@chris.nguyen/react-native-bottom-sheet@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@chrisnguyen/react-native-bottom-sheet@workspace:."
+  resolution: "@chris.nguyen/react-native-bottom-sheet@workspace:."
   dependencies:
     "@commitlint/config-conventional": ^17.0.2
     "@evilmartians/lefthook": ^1.5.0
