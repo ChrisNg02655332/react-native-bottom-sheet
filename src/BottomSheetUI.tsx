@@ -1,10 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import {
-  GestureDetector,
-  Gesture,
-  ScrollView,
-} from 'react-native-gesture-handler';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -45,7 +41,7 @@ type BottomSheetUIProps = {
 const BottomSheetUI = (props: BottomSheetUIProps) => {
   const {
     hide,
-    options: { height, disableClose, scrollEnabled, customBackdrop },
+    options: { height, disableClose, customBackdrop },
   } = props;
   const translateY = useSharedValue(0);
   const context = useSharedValue({ y: 0 });
@@ -102,8 +98,6 @@ const BottomSheetUI = (props: BottomSheetUIProps) => {
     };
   });
 
-  const Wrapper = scrollEnabled ? ScrollView : View;
-
   React.useEffect(() => {
     scrollTo(-Math.abs(height!));
     backdrop.value = withTiming(MAX_OPACITY);
@@ -126,7 +120,9 @@ const BottomSheetUI = (props: BottomSheetUIProps) => {
       <GestureDetector gesture={gesture}>
         <Animated.View style={[styles.container, animateStyle]}>
           <View style={styles.line} />
-          <Wrapper style={styles.content}>{renderContent(props)}</Wrapper>
+          <View style={[styles.content, { height: height }]}>
+            {renderContent(props)}
+          </View>
         </Animated.View>
       </GestureDetector>
     </>
