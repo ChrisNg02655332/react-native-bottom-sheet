@@ -34,6 +34,7 @@ function renderContent({ options, config, show, hide }: BottomSheetUIProps) {
 type BottomSheetUIProps = {
   options: BottomSheetOptions;
   config: BottomSheetConfig;
+  visible: boolean;
   show: (params: BottomSheetShowParams) => void;
   hide: (params: BottomSheetHideParams) => void;
 };
@@ -41,8 +42,10 @@ type BottomSheetUIProps = {
 const BottomSheetUI = (props: BottomSheetUIProps) => {
   const {
     hide,
+    visible,
     options: { height, disableClose, customBackdrop },
   } = props;
+  const [state, setState] = React.useState(0);
   const translateY = useSharedValue(0);
   const context = useSharedValue({ y: 0 });
 
@@ -51,17 +54,27 @@ const BottomSheetUI = (props: BottomSheetUIProps) => {
   const scrollTo = React.useCallback(
     (destination: number) => {
       'worklet';
-      translateY.value = withSpring(destination, { damping: 50 }, () => {
-        if (destination === 0) runOnJS(hide)();
+      if (destination < 0) {
+        runOnJS(setState)(destination);
+      } else {
+        backdrop.value = withTiming(0, {}, () => {
+          runOnJS(setState)(destination);
+          if (destination === 0) {
+            runOnJS(hide)();
+          }
+        });
+      }
+      translateY.value = withSpring(destination, {
+        duration: 1500,
+        dampingRatio: 0.7,
       });
     },
-    [translateY, hide]
+    [translateY, hide, backdrop]
   );
 
-  const onHide = () => {
-    backdrop.value = withTiming(0);
+  const onHide = React.useCallback(() => {
     scrollTo(0);
-  };
+  }, [scrollTo]);
 
   const gesture = Gesture.Pan()
     .onStart(() => {
@@ -99,9 +112,19 @@ const BottomSheetUI = (props: BottomSheetUIProps) => {
   });
 
   React.useEffect(() => {
-    scrollTo(-Math.abs(height!));
-    backdrop.value = withTiming(MAX_OPACITY);
-  }, [height, scrollTo, backdrop]);
+    if (visible) {
+      scrollTo(-Math.abs(height!));
+      backdrop.value = withTiming(MAX_OPACITY);
+    }
+  }, [height, scrollTo, backdrop, visible]);
+
+  React.useEffect(() => {
+    if (!visible && state < 0) {
+      onHide();
+    }
+  }, [visible, state, onHide]);
+
+  if (state === 0) return null;
 
   return (
     <>
