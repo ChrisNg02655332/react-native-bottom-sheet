@@ -1,16 +1,17 @@
 import * as React from 'react';
 
 import { Button, Dimensions, StyleSheet, Text, View } from 'react-native';
-import { BottomSheet } from 'react-native-bottom-sheet';
+import {
+  BottomSheet,
+  BottomSheetScrollView,
+} from '@feedlibs/react-native-bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const { height } = Dimensions.get('window');
 
 const Content1 = (props: any) => {
-  console.log(props);
-
   return (
-    <View>
+    <BottomSheetScrollView>
       <Text>Content 1</Text>
       <Button
         title="Hide"
@@ -18,7 +19,7 @@ const Content1 = (props: any) => {
           BottomSheet.hide();
         }}
       />
-    </View>
+    </BottomSheetScrollView>
   );
 };
 
@@ -48,10 +49,9 @@ export default function App() {
             onPress={() => {
               BottomSheet.show({
                 type: 'content_1',
-                height: height * 0.5,
-                disableClose: false,
-                scrollEnabled: true,
-                customBackdrop: backdrop,
+                height: height * 0.4,
+                // disableClose: false,
+                // customBackdrop: backdrop,
                 props: {
                   hehe: 'aaa',
                 },
