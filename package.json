@@ -1,6 +1,6 @@
 {
   "name": "@feedlibs/react-native-bottom-sheet",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "UI Components",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
