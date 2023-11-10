@@ -19,14 +19,15 @@ export const BottomSheetRoot = React.forwardRef(
       )
     );
 
-    return visible ? (
+    return (
       <BottomSheetUI
         options={options}
+        visible={visible}
         hide={hide}
         show={show}
         config={config}
       />
-    ) : null;
+    );
   }
 );
 
