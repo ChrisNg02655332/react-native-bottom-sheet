@@ -143,9 +143,7 @@ const BottomSheetUI = (props: BottomSheetUIProps) => {
       <GestureDetector gesture={gesture}>
         <Animated.View style={[styles.container, animateStyle]}>
           <View style={styles.line} />
-          <View style={[styles.content, { height: height }]}>
-            {renderContent(props)}
-          </View>
+          <View style={{ height: height }}>{renderContent(props)}</View>
         </Animated.View>
       </GestureDetector>
     </>
@@ -176,9 +174,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 15,
     borderRadius: 2,
-  },
-  content: {
-    padding: 16,
   },
 });
 
