@@ -1,5 +1,5 @@
 {
-  "name": "@feedlibs/react-native-bottom-sheet",
+  "name": "@antbase/react-native-bottom-sheet",
   "version": "0.3.1",
   "description": "UI Components",
   "main": "lib/commonjs/index",

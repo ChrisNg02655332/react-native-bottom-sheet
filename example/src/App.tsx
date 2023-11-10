@@ -4,12 +4,12 @@ import { Button, Dimensions, StyleSheet, Text, View } from 'react-native';
 import {
   BottomSheet,
   BottomSheetScrollView,
-} from '@feedlibs/react-native-bottom-sheet';
+} from '@antbase/react-native-bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const { height } = Dimensions.get('window');
 
-const Content1 = (props: any) => {
+const Content1 = () => {
   return (
     <BottomSheetScrollView>
       <Text>Content 1</Text>
@@ -28,17 +28,17 @@ const config = {
 };
 
 export default function App() {
-  const backdrop = () => (
-    <View
-      style={{
-        position: 'absolute',
-        zIndex: 1,
-        height: height,
-        width: '100%',
-        backgroundColor: 'red',
-      }}
-    />
-  );
+  // const backdrop = () => (
+  //   <View
+  //     style={{
+  //       position: 'absolute',
+  //       zIndex: 1,
+  //       height: height,
+  //       width: '100%',
+  //       backgroundColor: 'red',
+  //     }}
+  //   />
+  // );
 
   return (
     <>
