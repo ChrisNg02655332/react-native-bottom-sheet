@@ -15,10 +15,10 @@ import  { BottomSheet } from '@antbase/react-native-bottom-sheet';
 */
 const config = {
   content: (props) => (
-      <View style={{ height: 60, width: '100%' }}>
-        <Text>Welcome</Text>
-        <Text>{props.uuid}</Text>
-      </View>
+    <View style={{ height: 60, width: '100%' }}>
+      <Text>Welcome</Text>
+      <Text>{props.uuid}</Text>
+    </View>
     ),
   };
 /*
