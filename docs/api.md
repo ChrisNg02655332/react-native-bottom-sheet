@@ -65,7 +65,7 @@ The following set of `props` can be passed to the `BottomSheet` component instan
 For example, to make sure all your BottomSheets are displayed on the screen:
 
 ```js
-// App.jsx
+// App.tsx
 import { BottomSheet } from '@antbase/react-native-bottom-sheet';
 
 const config = {

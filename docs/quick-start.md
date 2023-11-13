@@ -13,7 +13,7 @@ npm install --save @antbase/react-native-bottom-sheet
 Render the `BottomSheet` component in your app's entry file, as the **LAST CHILD** in the `View` hierarchy (along with any other components that might be rendered there):
 
 ```js
-// App.jsx
+// App.tsx
 import { BottomSheet } from '@antbase/react-native-bottom-sheet';
 
 const config = {

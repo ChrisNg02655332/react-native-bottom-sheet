@@ -7,7 +7,7 @@ When creating the `config`, you can either:
 1. Create Bottom layouts from scratch
 
 ```js
-// App.jsx
+// App.tsx
 import  { BottomSheet } from '@antbase/react-native-bottom-sheet';
 
 /*
