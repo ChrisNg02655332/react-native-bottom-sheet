@@ -40,9 +40,9 @@ BottomSheet.show({
 
 The complete set of **options** is described below:
 
-| option           | description                                                         | type              | default value |
-| ---------------- | ------------------------------------------------------------------- | ----------------- | ------------- |
-| `type`           | BottomSheet type.  [Learn how to define types](./custom-layouts.md) | `string`
+| option           | description                                                         | type                      | default value |
+| ---------------- | ------------------------------------------------------------------- | ------------------------- | ------------- |
+| `type`           | BottomSheet type.  [Learn how to define types](./custom-layouts.md) | `string`                  |               |
 | `onShow`         | Called when the BottomSheet is shown                                                                                                                                                                  | `() => void`      |               |
 | `onHide`         | Called when the BottomSheet hides                                                                                                                                                                     | `() => void`      |               |
 | `onPress`        | Called on BottomSheet press                                                                                                                                                                           | `() => void`      |               |
