@@ -40,12 +40,11 @@ BottomSheet.show({
 
 The complete set of **options** is described below:
 
-| option           | description                                                         | type                      | default value |
-| ---------------- | ------------------------------------------------------------------- | ------------------------- | ------------- |
-| `type`           | BottomSheet type.  [Learn how to define types](./custom-layouts.md) | `string`                  |               |
-| `onShow`         | Called when the BottomSheet is shown                                                                                                                                                                  | `() => void`      |               |
-| `onHide`         | Called when the BottomSheet hides                                                                                                                                                                     | `() => void`      |               |
-| `onPress`        | Called on BottomSheet press                                                                                                                                                                           | `() => void`      |               |
+| option           | description                                                         | type              | default value |
+| ---------------- | ------------------------------------------------------------------- | ----------------- | ------------- |
+| `type`           | BottomSheet type.  [Learn how to define types](./layouts.md)        | `string`          |               |
+| `onShow`         | Called when the BottomSheet is shown                                | `() => void`      |               |
+| `onHide`         | Called when the BottomSheet hides                                   | `() => void`      |               |
 | `props`          | Any custom props passed to the specified BottomSheet type. Has effect only when there is a custom BottomSheet type (configured via the `config` prop on the BottomSheet instance) that uses the `props` parameter | `any`             |               |
 
 ### `hide()`
