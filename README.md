@@ -16,7 +16,15 @@ BottomSheet component for React Native.
 - 🎨 Customizable layouts
 - 🔧 Flexible config
 
-## Documentation
+## Installation
+
+### Dependencies
+This library needs these dependencies to be installed in your project before you can use it:
+```js
+yarn add react-native-reanimated react-native-gesture-handler
+```
+
+
 
 <!-- > This is the documentation for `react-native-toast-message@v2`, which has a similar API to v1, but contains a few important changes. [Read the complete changelog](./CHANGELOG.md#200). -->
 <!---->

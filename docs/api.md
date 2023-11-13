@@ -63,7 +63,7 @@ The following set of `props` can be passed to the `BottomSheet` component instan
 
 | prop             | description                                       | type                                         | default value |
 | ---------------- | ------------------------------------------------- | -------------------------------------------- | ------------- |
-| `config`         | Layout configuration for custom BottomSheet types | [`BottomSheetConfig`](../src/types/index.ts) |               |
+| `config`         | Layout configuration for custom BottomSheet types | [`BottomSheetConfig`](../src/types.ts) |               |
 | `type`           | Default BottomSheet type `string`                 | `success`                                    |               |
 | `onShow`         | Called when any BottomSheet is shown              | `() => void`                                 |               |
 | `onHide`         | Called when any BottomSheet hides                 | `() => void`                                 |               |
