@@ -18,19 +18,15 @@ BottomSheet component for React Native.
 
 ## Installation
 
-### Dependencies
+##### Dependencies
 This library needs these dependencies to be installed in your project before you can use it:
-```js
+```sh
 yarn add react-native-reanimated react-native-gesture-handler
 ```
 
-
-
-<!-- > This is the documentation for `react-native-toast-message@v2`, which has a similar API to v1, but contains a few important changes. [Read the complete changelog](./CHANGELOG.md#200). -->
-<!---->
-<!-- - [Quick start](./docs/quick-start.md) -->
-<!-- - [API](./docs/api.md) -->
-<!-- - [Create custom layouts](./docs/custom-layouts.md) -->
+- [Quick start](./docs/quick-start.md)
+- [API](./docs/api.md)
+- [Create layouts](./docs/layouts.md)
 <!-- - FAQ -->
 <!--   - [How to show the Toast inside a Modal?](./docs/modal-usage.md) -->
 <!--   - [How to render the Toast when using a Navigation library?](./docs/navigation-usage.md) -->

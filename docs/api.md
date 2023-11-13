@@ -16,21 +16,15 @@ import { View, Text, Button } from 'react-native';
 import { BottomSheet } from '@antbase/react-native-bottom-sheet';
 
 const config = {
-  content: (props: any) => <Content {...props} />,
-};
-
-const Content = () => {
-  return (
+  content: (props: any) => (
     <View>
-      <Text>Content 1</Text>
+      <Text>Welcome 👋</Text>
       <Button
         title="Hide"
-        onPress={() => {
-          BottomSheet.hide();
-        }}
+        onPress={() => BottomSheet.hide()}
       />
     </View>
-  );
+  ),
 };
 
 BottomSheet.show({
