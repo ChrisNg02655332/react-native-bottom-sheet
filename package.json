@@ -1,6 +1,6 @@
 {
   "name": "@antbase/react-native-bottom-sheet",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "UI Components",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
