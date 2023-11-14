@@ -9,8 +9,6 @@ console.log(exclusionList);
 const root = path.resolve(__dirname, '..');
 const modules = Object.keys({ ...pak.peerDependencies });
 
-console.log(modules)
-
 /**
  * Metro configuration
  * https://facebook.github.io/metro/docs/configuration

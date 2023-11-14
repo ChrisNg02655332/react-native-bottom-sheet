@@ -27,10 +27,12 @@ yarn add react-native-reanimated react-native-gesture-handler
 - [Quick start](./docs/quick-start.md)
 - [API](./docs/api.md)
 - [Create layouts](./docs/layouts.md)
-<!-- - FAQ -->
-<!--   - [How to show the Toast inside a Modal?](./docs/modal-usage.md) -->
-<!--   - [How to render the Toast when using a Navigation library?](./docs/navigation-usage.md) -->
-<!--   - [How to mock the library for testing with jest?](./docs/jest-testing.md) -->
+- [Custom backdrop](./docs/custom-backdrop.md)
+
+- FAQ
+  - [How to show the BottomSheet inside a Modal?](./docs/modal-usage.md)
+  - [How to render the BottomSheet when using a Navigation library?](./docs/navigation-usage.md)
+  - [How to mock the library for testing with jest?](./docs/jest-testing.md)
 
 ## License
 

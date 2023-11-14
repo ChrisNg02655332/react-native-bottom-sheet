@@ -67,3 +67,4 @@ Explore the following topics:
 
 - [Using the BottomSheet API](./api.md)
 - [Create layouts](./layouts.md)
+- [Custom backdrop](./custom-backdrop.md)
